@@ -11,7 +11,7 @@ This example uses [Amazon Polly](https://aws.amazon.com/polly/) to transcribe te
 
 # Usage 
 
-Press the play button to hear the current time! 
+A Twitch viewer will click the play button to hear the current time! 
 
 <img src="https://github.com/mauerbac/amazon-polly-twitch-extension/blob/master/panel.png" width="420">
 
