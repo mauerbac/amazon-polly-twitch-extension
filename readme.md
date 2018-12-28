@@ -13,8 +13,7 @@ This example uses [Amazon Polly](https://aws.amazon.com/polly/) to transcribe te
 
 Press the play button to hear the current time! 
 
-![Example]()
-
+<img src="https://github.com/mauerbac/amazon-polly-twitch-extension/blob/master/panel.png" width="420">
 
 # Building the App
 
