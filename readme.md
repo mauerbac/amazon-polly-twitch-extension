@@ -4,33 +4,35 @@ This example uses [Amazon Polly](https://aws.amazon.com/polly/) to transcribe te
 
 ### Amazon Polly
 
-[Polly](https://aws.amazon.com/polly/) is a service that turns text into lifelike speech, allowing you to create applications that talk, and build entirely new categories of speech-enabled products. Amazon Polly is a Text-to-Speech service that uses advanced deep learning technologies to synthesize speech that sounds like a human voice.
+[Polly](https://aws.amazon.com/polly/) is an AWS service that turns text into lifelike speech, allowing developers to create applications that talk, and build entirely new categories of speech-enabled products. Amazon Polly is a Text-to-Speech service that uses advanced deep learning technologies to synthesize speech that sounds like a human voice.
 
 ### Twitch Extensions 
 [Twitch Extensions](https://www.twitch.tv/p/extensions/) are programmable interactive overlays and panels, which help streamers interact with their viewers. The Twitch community can interact in new ways  - from heat maps and real-time game data overlays to mini-games, music requests to leaderboards.
 
 # Usage 
 
-A Twitch viewer will click the play button to hear the current time! 
+A Twitch viewer will click the play button to hear the current time during a broadcast.
 
 <img src="https://github.com/mauerbac/amazon-polly-twitch-extension/blob/master/panel.png" width="420">
 
 # Building the App
 
-Step-by-step on how to configure, develop & deploy this locally using the Twitch Developer Rig. 
+Step-by-step on how to configure, develop & deploy this locally using the [Twitch Developer Rig](https://dev.twitch.tv/docs/extensions/rig/). 
 
 ### Architecture 
 
-The panel extension captures the current time and produces a text string that is sent to our Extension Backend Service, which then leverages Polly to convert into an mp3. This audio file is then returned to the frontend panel which is played via the browser. 
+This app leverages a simple frontend/backend architecture. The panel Extension captures the current time and produces a text string that is sent to our backend aka our Extension Backend Service, which then leverages Polly to convert text into an mp3. This audio file is then returned to the frontend Extension panel which is played through the browser. 
 
-Simply, `panel.html` & `viewer.js` control the frontend logic (Twitch Panel). `backend.py` contains the logic for a backend endpoint `/read` which returns audio produced by Polly.  	  
+*Note:* Twitch only allows playing sound through Panel Extnesions where the inital state is muted. The viewer can then unmute to hear sounds. 
+
+The provided code is arranged as follows: `panel.html` & `viewer.js` controls the frontend logic (Twitch Extension Panel). `backend.py` contains the logic for the backend endpoint `/read`, which returns audio produced by Polly.  	  
 
 ### Housekeeping
 1. Sign-in to AWS or [Create an Account](https://us-west-2.console.aws.amazon.com).
 2. Pick a region in the console and be consistent throughout this app. Use either `us-east-1`, `us-west-2` & `eu-west-1`.
-3. Create an IAM role with full access to Amazon Polly 
+3. Create an IAM role with full access to Amazon Polly. Records the AccessId and SecretKey.
 4. Create/login to a Twitch Developer account & view the [Extension Dashboard](https://dev.twitch.tv/dashboard/extensions).
-5. Download the developer rig using the button in the upper right. 
+5. Download the developer rig using the button in the upper right. We will create the Extension shortly.  
 
 ### Amazon Polly
 
@@ -40,7 +42,7 @@ Polly is contained in our Extension Backend Service and can be viewed in `backen
 
 Ensure you’ve create an [IAM profile locally](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-role.html) using the credentials from earlier. 
 
-The snippet shows the crux of the Polly SDK. It takes in text to convert to speech, a voice and an output format. 
+The snippet shows the crux of the Polly SDK. It takes in text to convert to speech, a voice type and an output format. 
 ```
 response = polly.synthesize_speech(
          Text=text,
@@ -49,15 +51,17 @@ response = polly.synthesize_speech(
        )
 ```
 
-### Panel Extension
-1. In the Extension dashboard, click Create Extension
-2. Give it a name and checkbox `Panel` under Type of Extension  
-3. Select you are using the developer rig
+### Twitch Panel Extension
+
+If you haven't seen a Panel Extension, check out [Ninja's channel](https://www.twitch.tv/ninja) and view his Subscription Gifting Leaderboard beneath the video display. Broadcasters can display three panels at a time.
+
+1. In the Extension dashboard, click Create Extension.
+2. Give it a name and check the `Panel` checkbox under Type of Extension.
+3. Select you are using the developer rig.
 4. Provide a summary, description, as well as provide a valid email addresses. Then press Create. 
-5. Record the `clientID` and `secretKey` from the web dashboard.
+5. Record the `clientID` and `secretKey` from the web dashboard. This will be used in the Dev Rig.
 
-
-Review the code `viewer.js`. This contains the frontend logic to make a request to our backend. We take the user timezone to avoid issues with timezone and make a get request to `/read`.  
+Review the code `viewer.js`. This contains the frontend logic to make a request to our backend. We take the user's timestamp client-side to avoid issues with timezones.
 
 
 ### Using the Developer Rig
@@ -67,7 +71,7 @@ The Twitch developer rig makes it easy to build and test extensions. It will mim
 1. Open the rig and provide it with your project’s clientID and secretKey.
 2. Click import to pull down the manifest. 
 3. Provide a file path to a clean directory. 
-4. Select the hell world boilerplate code. This will generate the skeleton for a basic frontend/backend extension.   
+4. Select the hello world boilerplate code. This will generate the skeleton code for a basic frontend/backend extension.   
 5. Next, add a panel view. 
 6. Navigate to the newly created directory and replace the frondend files `panel.html`, `viewer.js`
 7. Also, replace the backend file `backend.js` with `backend.py`. Polly SynthesizeSpeech is an async function so Python makes it a bit easier. 
