@@ -43,12 +43,12 @@ Ensure you’ve create an [IAM profile locally](https://docs.aws.amazon.com/cli/
 
 The snippet shows the crux of the Polly SDK. It takes in text to convert to speech, a voice and an output format. 
 ```
-response = polly.synthesize_speech(Text=text,
-                                                    VoiceId=voiceId,
-                                                    OutputFormat=outputFormat)
-
+response = polly.synthesize_speech(
+         Text=text,
+         VoiceId=voiceId,
+         OutputFormat=outputFormat
+       )
 ```
-
 
 ### Panel Extension
 1. In the Extension dashboard, click Create Extension
@@ -65,13 +65,13 @@ Review the code `viewer.js`. This contains the frontend logic to make a request 
 
 The Twitch developer rig makes it easy to build and test extensions. It will mimic the user’s environment and will handle authentication by displaying the extension in an iframe. Let’s setup the rig and test the app. 
 
-Open the rig and provide it with your project’s clientID and secretKey.
-Click import to pull down the manifest. 
-Provide a file path to a clean directory. 
-Select the hell world boilerplate code. This will generate the skeleton for a basic frontend/backend extension.   
-Next, add a panel view. 
-Navigate to the newly created directory and replace the frondend files `panel.html`, `viewer.js`
-Also, replace the backend file `backend.js` with `backend.py`. Polly SynthesizeSpeech is an async function so Python makes it a bit easier. 
-The rig should be able to run the frontend via “Start Hosting”
-Change the backend command to `python backend.py` and run 
-Using the panel view you created you should be able to test the app and hear the time spoken. 
+1. Open the rig and provide it with your project’s clientID and secretKey.
+2. Click import to pull down the manifest. 
+3. Provide a file path to a clean directory. 
+4. Select the hell world boilerplate code. This will generate the skeleton for a basic frontend/backend extension.   
+5. Next, add a panel view. 
+6. Navigate to the newly created directory and replace the frondend files `panel.html`, `viewer.js`
+7. Also, replace the backend file `backend.js` with `backend.py`. Polly SynthesizeSpeech is an async function so Python makes it a bit easier. 
+8. The rig should be able to run the frontend via “Start Hosting”
+9. Change the backend command to `python backend.py` and run 
+10. Using the panel view you created you should be able to test the app and hear the time spoken. 
