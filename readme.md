@@ -29,7 +29,7 @@ Below are step-by-step instructions on how to configure, develop, and deploy thi
 
 1. Sign-in to AWS or [Create an Account](https://us-west-2.console.aws.amazon.com).
 2. Pick a region in the console and be consistent throughout this app. Use either `us-east-1`, `us-west-2`, or `eu-west-1`.
-3. Create an IAM role with full access to Amazon Polly. Records the AccessId and SecretKey.
+3. Create an [IAM role](https://console.aws.amazon.com/iam/home?#/home) with full access to Amazon Polly. Records the AccessId and SecretKey.
 4. Create/login to a Twitch account for your development and view the Extensions section of the [Developer Dashboard](https://dev.twitch.tv/dashboard/extensions).
 5. Download the Developer Rig using the button in the upper right. We will create the Extension shortly.  
 
@@ -69,10 +69,10 @@ The Twitch Developer Rig makes it easy to build and test Extensions. It will mim
 
 1. Open the rig and provide it with your project's clientID and secretKey.
 2. Click import to pull down the manifest. 
-3. Provide a file path to a clean directory. 
+3. Provide an absolute file path to a clean directory to build this project. 
 4. Select the hello world boilerplate code. This will generate the skeleton code for a basic frontend/backend Extension.   
 5. Next, add a panel view. 
-6. Navigate to the newly created directory and replace the frontend files `panel.html` and `viewer.js`.
+6. Navigate to the newly created directory and replace the frontend files for `panel.html` and `viewer.js` with the files in this repo.
 7. Also, replace the backend file `backend.js` with `backend.py`. Polly SynthesizeSpeech is an async function so Python makes it a bit easier. 
 8. The Rig should be able to run the frontend via "Start Hosting"
 9. Change the backend command to `python backend.py` and run 
