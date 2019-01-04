@@ -25,7 +25,7 @@ The provided code is arranged as follows: `panel.html` and `viewer.js` controls 
 
 Below are step-by-step instructions on how to configure, develop, and deploy this example locally using the Twitch Developer Rig.  
 
-### Housekeeping
+### Setup
 
 1. Sign-in to AWS or [Create an Account](https://us-west-2.console.aws.amazon.com).
 2. Pick a region in the console and be consistent throughout this app. Use either `us-east-1`, `us-west-2`, or `eu-west-1`.
@@ -52,7 +52,7 @@ response = polly.synthesize_speech(
 
 ### Twitch Panel Extension
 
-If you haven't seen a panel Extension, check out [Ninja's channel](https://www.twitch.tv/ninja) and view his "Subscription Gifting Leaderboard" beneath the video display. Broadcasters can display three panel Extensions at a time.
+If you haven't seen a panel Extension, check out [TwitchDev](https://www.twitch.tv/twitchdev) and view the Twitter Panel Extension beneath the video display. Broadcasters can display three panel Extensions at a time.
 
 1. In the [Extension dashboard](https://dev.twitch.tv/dashboard/extensions), click Create Extension.
 2. Give it a name and check the `Panel` checkbox under Type of Extension.
